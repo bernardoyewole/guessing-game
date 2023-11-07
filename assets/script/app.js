@@ -13,8 +13,9 @@ function select(selector, parent = document) {
 const numberOfGuesses = select('.num-guess span');
 const restart = select('.restart');
 const input = select('.input');
-const button = select('button')
+const guessBtn = select('.guess')
 const result = select('.result');
+// const heading = select('h1');
 
 let guesses = 5;
 
@@ -36,21 +37,45 @@ function isValid(arg) {
     }
 }
 
+function compare(num1, num2) {
+    if (num1 > num2) {
+        result.innerText = `My number is smaller`;
+    } else if (num1 < num2) {
+        result.innerText = `My number is higher`;
+    }
+}
+
+function guessIsValid(num) {
+    if (num > 0) {
+        return true;
+    }
+    return false;
+}
+
+function gameOver(num) {
+    if (num === 0) {
+        result.innerText = `Game Over`;
+        result.classList.add('game-overgame')
+        restart.classList.remove('hidden');
+    }
+}
+
 let myNumber = getRandomNumber();
 
-onEvent('click', button, () => {
+onEvent('click', guessBtn, () => {
     let inputNum = Number.parseFloat(input.value);
-    if (isValid(inputNum)) {
+
+    if (isValid(inputNum) && guessIsValid(guesses)) {
         if (inputNum === myNumber) {
-            result.innerText = `You won!!`
+            result.innerText = `You won!!`;
+            restart.classList.remove('hidden');
         } else {
             guesses--;
             numberOfGuesses.innerText = guesses;
-            if (inputNum > myNumber) {
-                result.innerText = `My number is smaller`
-            } else {
-                result.innerText = `My number is higher`
-            }
+            compare(inputNum, myNumber);
         }
-    } 
-})
+    }
+    
+    gameOver(guesses);
+});
+

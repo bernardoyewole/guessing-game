@@ -48,13 +48,17 @@ main {
     height: 60px;
 }
 
-li {
+li, .restart {
     font-size: 18px;
     color: #000080;
     background-color: #f6f6ff;
     padding: 10px 30px;
     border-radius: 4px;
     font-weight: 600;
+}
+
+.restart {
+    cursor: pointer;
 }
 
 h1 {
@@ -94,7 +98,7 @@ input {
     color: #000080;
 }
 
-button {
+.guess {
     padding: 10px 30px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -108,3 +112,7 @@ button {
 .hidden {
     visibility: hidden;
 }
+
+/* .game-over {
+    background-color: 2px solid #800000;
+} */

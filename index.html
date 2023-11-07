@@ -20,16 +20,15 @@
                 <div class="content-head">
                     <ul class="nav">
                         <li class="num-guess">Guesses: <span></span></li>
-                        <li class="restart">Play again</li>
+                        <button class="restart">Play again</buttton>
                     </ul>
                 </div>
                 <form onSubmit="return false;">
                     <h1>Welcome!!</h1>
                     <p>Guess a number between 1 and 10</p>
-                    <p>You have 5 guesses</p>
                     <input type="text" class="input" minlength="1" maxlength="1">
-                    <button type="button">Guess</button>
-                    <p class="result"></p>
+                    <button type="button" class="guess">Guess</button>
+                    <p class="result">You have 5 guesses</p>
                 </form>
             </div>
         </main>
