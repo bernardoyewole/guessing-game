@@ -14,7 +14,11 @@ const numberOfGuesses = select('.num-guess span');
 const restart = select('.restart');
 const input = select('.input');
 const guessBtn = select('.guess')
+const hint = select('.hint');
 const result = select('.result');
+const resultContent = select('.result h1');
+const background = select('.background')
+
 // const heading = select('h1');
 
 let guesses = 5;
@@ -23,6 +27,7 @@ onEvent('load', window, () => {
     restart.classList.add('hidden');
     input.value = '';
     numberOfGuesses.innerText = guesses;
+    result.classList.add('hidden');
 });
 
 function getRandomNumber() {
@@ -33,15 +38,15 @@ function isValid(arg) {
     if (arg !== '' && !isNaN(arg)) {
         return true;
     } else {
-        result.innerText = `Please, enter a number between 1 and 10 :)`
+        hint.innerText = `Please, enter a number between 1 and 10 :)`;
     }
 }
 
-function compare(num1, num2) {
+function hint(num1, num2) {
     if (num1 > num2) {
-        result.innerText = `My number is smaller`;
+        hint.innerText = `My number is lower`;
     } else if (num1 < num2) {
-        result.innerText = `My number is higher`;
+        hint.innerText = `My number is higher`;
     }
 }
 
@@ -54,9 +59,21 @@ function guessIsValid(num) {
 
 function gameOver(num) {
     if (num === 0) {
-        result.innerText = `Game Over`;
-        result.classList.add('game-overgame')
+        resultContent.innerText = 'Game Over';
+        result.classList.remove('hidden');
+        result.classList.add('visible');
         restart.classList.remove('hidden');
+        background.classList.add('bg-blur');
+    }
+}
+
+function win(input, num) {
+    if (input === num) {
+        resultContent.innerText = 'You Win!!';
+        result.classList.remove('hidden');
+        result.classList.add('visible');
+        restart.classList.remove('hidden');
+        background.classList.add('bg-blur');
     }
 }
 
@@ -67,12 +84,11 @@ onEvent('click', guessBtn, () => {
 
     if (isValid(inputNum) && guessIsValid(guesses)) {
         if (inputNum === myNumber) {
-            result.innerText = `You won!!`;
-            restart.classList.remove('hidden');
+            win(inputNum, myNumber);
         } else {
             guesses--;
             numberOfGuesses.innerText = guesses;
-            compare(inputNum, myNumber);
+            hint(inputNum, myNumber);
         }
     }
     

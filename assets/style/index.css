@@ -20,7 +20,8 @@ body {
     font-family: "Lato", "Open Sans", Arial, sans-serif;
     font-weight: 400;
     line-height: 1.4;
-    background-color: #000080;
+    background: linear-gradient(#276482, #3991bd);
+    background-repeat: no-repeat;
 }
 
 li {
@@ -36,6 +37,17 @@ main {
     width: min(100% - 30px, 1080px);
     margin-inline: auto;
     height: 100%;
+}
+
+.bg-blur {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;   
 }
 
 .nav {
@@ -59,9 +71,24 @@ li, .restart {
 
 .restart {
     cursor: pointer;
+    z-index: 2;
+}
+
+.result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
 h1 {
+    font-size: 60px;
+    color: #f6f6ff;
+    font-weight: 700;
+}
+
+h2 {
     font-size: 40px;
     color: #f6f6ff;
     margin-bottom: 40px;
@@ -80,11 +107,13 @@ form p {
     font-size: 20px;
 }
 
-.result {
+.hint {
     font-size: 17px;
-    background-color: rgb(92, 92, 137);
+    background-color: #be7049;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 2px;
+    font-weight: 600;
+    padding: 10px 20px;
 }
 
 input {
@@ -110,9 +139,10 @@ input {
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
-/* .game-over {
-    background-color: 2px solid #800000;
-} */
+.visible {
+    display: block;
+}
+
