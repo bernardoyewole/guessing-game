@@ -107,4 +107,11 @@ onEvent('click', guessBtn, () => {
 
 onEvent('click', restart, () => {
     restartGame();
+});
+
+onEvent('keyup', input, (event) => {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        guessBtn.click();
+    }
 })
