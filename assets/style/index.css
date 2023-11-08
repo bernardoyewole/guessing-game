@@ -72,6 +72,11 @@ li, .restart {
 .restart {
     cursor: pointer;
     z-index: 2;
+    transition: all 0.3s ease-in-out;
+}
+
+.restart:hover {
+    background-color: #e6e8e9;
 }
 
 .result {
@@ -136,6 +141,7 @@ input {
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 .hidden {

@@ -42,7 +42,7 @@ function isValid(arg) {
     }
 }
 
-function hint(num1, num2) {
+function compare(num1, num2) {
     if (num1 > num2) {
         hint.innerText = `My number is lower`;
     } else if (num1 < num2) {
@@ -77,6 +77,16 @@ function win(input, num) {
     }
 }
 
+function restartGame() {
+    resultContent.innerText = '';
+    restart.classList.add('hidden');
+    input.value = '';
+    guesses = 5;
+    numberOfGuesses.innerText = guesses;
+    result.classList.add('hidden');
+    background.classList.remove('bg-blur');
+}
+
 let myNumber = getRandomNumber();
 
 onEvent('click', guessBtn, () => {
@@ -88,10 +98,13 @@ onEvent('click', guessBtn, () => {
         } else {
             guesses--;
             numberOfGuesses.innerText = guesses;
-            hint(inputNum, myNumber);
+            compare(inputNum, myNumber);
         }
     }
     
     gameOver(guesses);
 });
 
+onEvent('click', restart, () => {
+    restartGame();
+})
