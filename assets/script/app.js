@@ -17,7 +17,8 @@ const guessBtn = select('.guess')
 const hint = select('.hint');
 const result = select('.result');
 const resultContent = select('.result h1');
-const background = select('.background')
+const background = select('.background');
+const secretNum = select('.result p');
 
 // const heading = select('h1');
 
@@ -38,15 +39,15 @@ function isValid(arg) {
     if (arg !== '' && !isNaN(arg)) {
         return true;
     } else {
-        hint.innerText = `Please, enter a number between 1 and 10 :)`;
+        hint.innerText = `Please, enter a number between 1 and 10`;
     }
 }
 
 function compare(num1, num2) {
     if (num1 > num2) {
-        hint.innerText = `My number is lower`;
+        hint.innerText = `HINT: My number is lower`;
     } else if (num1 < num2) {
-        hint.innerText = `My number is higher`;
+        hint.innerText = `HINT: My number is higher`;
     }
 }
 
@@ -60,6 +61,7 @@ function guessIsValid(num) {
 function gameOver(num) {
     if (num === 0) {
         resultContent.innerText = 'Game Over';
+        secretNum.innerText = `The secret number was ${myNumber}`
         result.classList.remove('hidden');
         result.classList.add('visible');
         restart.classList.remove('hidden');
@@ -78,12 +80,14 @@ function win(input, num) {
 }
 
 function restartGame() {
-    resultContent.innerText = '';
     restart.classList.add('hidden');
+    result.classList.add('hidden');
+    hint.innerText = `HINT: You have 5 attempts`;
+    resultContent.innerText = '';
+    secretNum.innerText = '';
     input.value = '';
     guesses = 5;
     numberOfGuesses.innerText = guesses;
-    result.classList.add('hidden');
     background.classList.remove('bg-blur');
 }
 
