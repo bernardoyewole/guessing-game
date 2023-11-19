@@ -20,8 +20,6 @@ const resultContent = select('.result h1');
 const background = select('.background');
 const secretNum = select('.result p');
 
-// const heading = select('h1');
-
 let guesses = 5;
 
 onEvent('load', window, () => {
@@ -32,11 +30,13 @@ onEvent('load', window, () => {
 });
 
 function getRandomNumber() {
-    return Math.floor(Math.random() * (10 - 1) + 1);
+    return Math.floor((Math.random() * 10) + 1);
 }
 
+let myNumber = getRandomNumber();
+
 function isValid(arg) {
-    if (arg !== '' && !isNaN(arg)) {
+    if (arg !== '' && /^([1-9]|10)$/.test(arg) === true) {
         return true;
     } else {
         hint.innerText = `Please, enter a number between 1 and 10`;
@@ -88,15 +88,13 @@ function restartGame() {
     input.value = '';
     guesses = 5;
     numberOfGuesses.innerText = guesses;
+    myNumber = getRandomNumber();
     background.classList.remove('bg-blur');
 }
 
-let myNumber = getRandomNumber();
-
 onEvent('click', guessBtn, () => {
-    let inputNum = Number.parseFloat(input.value);
-
-    if (isValid(inputNum) && guessIsValid(guesses)) {
+    if (isValid(input.value) && guessIsValid(guesses)) {
+        let inputNum = Number.parseInt(input.value);
         if (inputNum === myNumber) {
             win(inputNum, myNumber);
         } else {
